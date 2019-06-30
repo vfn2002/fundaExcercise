@@ -1,0 +1,59 @@
+<div style="width: 100%;">
+    <label for="take">Take:</label>
+    <input id="take" type="number" placeholder="Take" [(ngModel)]="take">
+
+    <label for="category">Category:</label>
+    <input id="category" type="text" placeholder="category" [(ngModel)]="category">
+
+    <label for="city">City:</label>
+    <input id="city" type="text" placeholder="category" [(ngModel)]="city">
+</div>
+
+<div>
+  <button class="btn btn-primary" [disabled]="isLoading" (click)="loadAgents()">load agents</button>
+</div>
+
+<ng-container *ngIf="agents">
+  <h3>Makelaars with the most listings</h3>
+
+  <table class='table table-striped'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Listings #</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let agent of agents">
+        <td>{{ agent.name }}</td>
+        <td>{{ agent.listings }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>
+
+
+<div>
+  <button class="btn btn-primary" [disabled]="isLoading" (click)="loadAgentsWithGardens()">load agents with gardens!</button>
+</div>
+
+<ng-container *ngIf="agentsWithGardens">
+  <h3>Makelaars with the most listings under the category 'Tuin'</h3>
+  
+  <table class='table table-striped'>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Listings #</th>
+      </tr>
+    </thead>
+    
+    <tbody>
+      <tr *ngFor="let agent of agentsWithGardens">
+        <td>{{ agent.name }}</td>
+        <td>{{ agent.listings }}</td>
+      </tr>
+    </tbody>
+  </table>
+</ng-container>

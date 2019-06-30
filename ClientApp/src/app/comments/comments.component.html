@@ -1,0 +1,78 @@
+<h3>
+  Endpoints  
+</h3>
+
+<pre>
+  /api/source/loadAgents/[category]/[city]/
+</pre>
+
+<p>
+  fetches all results that is used to load in makelaars to our in-memory database that .net core uses.
+</p>
+
+<br>
+
+<pre>
+  /api/source/loadAgents/[category]/[city]/[filter]/
+</pre>
+
+<p>
+  Same as above, but with the filter. This can be used with 'Tuin' as descried in the exercise.
+</p>
+
+<br>
+
+<pre>
+  /api/agent/getMostListings/[category]/[city]/[take]
+</pre>
+
+<p>
+  What is suppose to be the exposed endpoint to get the makelaars with the most listings. Take refers to the amount you want.
+</p>
+
+<br>
+
+<pre>
+  /api/agent/getMostGardenListings/[category]/[city]/[take]
+</pre>
+
+<p>
+  Same as above, now with more gardens!
+</p>
+
+<br>
+
+<h3>Notes</h3>
+
+<p>
+  I've limited the pages to 10 by default, but this can be changed in AppSettings. Theres no real reason to read more pages.
+  Unless you're a fan of waiting, that is! To get all makelaars, set `RequestPages` to `-1`.
+</p>
+
+<p>
+  I've added the API key to the secrets, so if you want to run it, you will probably have to add the api key under the key "Api:ApiKey".
+</p>
+
+<p>
+  This is the first time i've ever used .Net core, and first time i've made a .net project from scratch.
+  I've wanted to learn how to build web apis myself for a while now, and saw this as an opportunity to do exactly that.
+</p>
+
+<p>
+  The main thing I have to comment on with the exercise is that the API wasn't documented, so I believed that it would be possible
+  to find the endpoint for the makelaars by changing the `type` to makelaar(s). This did indeed hit an endpoint but with thrown exceptions. I spent
+  a bit of time trying to find out how that would work, but I didnt manage, so I resorted to scraping the makelaars with the provided
+  endpoint.
+</p>
+
+<p>
+  Frontend part is <b>very</b> barebones, and is practically the default template that comes with .net core.
+  I just thought it was fun when I saw it in the .net core cli, since I am familiar with angular :-).
+</p>
+
+<p>
+  I decided to stop trying to make in-memory DB work well. Because I am passing the same context everywhere with DI the context will already be tracked if this is called again.
+  This will result in errors when loading more than once. I believe there is a way to fix this with creating new contexts when
+  handling context changes, but most things I tried 
+  This means every call to the API will have to load the data instead of pulling from the context.
+</p>
